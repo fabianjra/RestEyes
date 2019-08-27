@@ -133,6 +133,10 @@
     <value>OnWindows</value>
     <comment>El valor para inciar con windows desde el incio</comment>
   </data>
+  <data name="NombreApp" xml:space="preserve">
+    <value>RestEyes</value>
+    <comment>El nombre de la aplicacion</comment>
+  </data>
   <data name="NombreFile" xml:space="preserve">
     <value>configRestEye.txt</value>
     <comment>El nombre  para el archivo .TXT que se guardara en la carpeta del usuario</comment>

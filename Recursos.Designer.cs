@@ -97,6 +97,15 @@ namespace RestEyes {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to RestEyes.
+        /// </summary>
+        internal static string NombreApp {
+            get {
+                return ResourceManager.GetString("NombreApp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to configRestEye.txt.
         /// </summary>
         internal static string NombreFile {
