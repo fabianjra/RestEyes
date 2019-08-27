@@ -105,11 +105,10 @@ namespace RestEyes
     {
       try
       {
-        if (ConsultaIniciaWindows())
-          Archivo(false, Recursos.ModoDiscreto, Recursos.ModoOnWindows);
-        else
-          Archivo(false, Recursos.ModoDiscreto, Recursos.ModoOffWindows);
+        bool IniciarWin = ConsultaIniciaWindows();
 
+        //Si actualmente inicia con windows, entonces envia como parametro el modo ON
+        Archivo(false, Recursos.ModoDiscreto, IniciarWin ? Recursos.ModoOnWindows : Recursos.ModoOffWindows);
       }
       catch (Exception ex)
       {
@@ -121,10 +120,10 @@ namespace RestEyes
     {
       try
       {
-        if (ConsultaIniciaWindows())
-          Archivo(false, Recursos.ModoAlerta, Recursos.ModoOnWindows);
-        else
-          Archivo(false, Recursos.ModoAlerta, Recursos.ModoOffWindows);
+        bool IniciarWin = ConsultaIniciaWindows();
+
+        //Si actualmente inicia con windows, entonces envia como parametro el modo ON
+        Archivo(false, Recursos.ModoAlerta, IniciarWin ? Recursos.ModoOnWindows : Recursos.ModoOffWindows);
       }
       catch (Exception ex)
       {
@@ -136,7 +135,10 @@ namespace RestEyes
     {
       try
       {
-        IniciarConWindows(true);
+        bool checkDiscreto = ((ToolStripMenuItem)notificacionIcono.ContextMenuStrip.Items[(int)Opcion.ModoDiscreto]).Checked;
+
+        //Si actualmente esta chequeada la opcion de modo discreto, lo envia con ese modo, sino, envia el modo alerta
+        Archivo(false, checkDiscreto ? Recursos.ModoDiscreto : Recursos.ModoAlerta, Recursos.ModoOnWindows);
       }
       catch (Exception ex)
       {
@@ -148,7 +150,10 @@ namespace RestEyes
     {
       try
       {
-        IniciarConWindows(false);
+        bool checkAlerta = ((ToolStripMenuItem)notificacionIcono.ContextMenuStrip.Items[(int)Opcion.ModoAlerta]).Checked;
+
+        //Si actualmente esta chequeada la opcion de modo discreto, lo envia con ese modo, sino, envia el modo alerta
+        Archivo(false, checkAlerta ? Recursos.ModoAlerta : Recursos.ModoDiscreto, Recursos.ModoOffWindows);
       }
       catch (Exception ex)
       {
@@ -225,8 +230,8 @@ namespace RestEyes
 
         notificacionIcono.ContextMenuStrip.Items.Add("Cerrar", null, NotificacionIcon_Cerrar);
 
-        ((ToolStripMenuItem)notificacionIcono.ContextMenuStrip.Items[0]).Checked = true;
-        ((ToolStripMenuItem)notificacionIcono.ContextMenuStrip.Items[3]).Checked = true;
+        //((ToolStripMenuItem)notificacionIcono.ContextMenuStrip.Items[0]).Checked = true;
+        //((ToolStripMenuItem)notificacionIcono.ContextMenuStrip.Items[3]).Checked = true;
       }
       catch (Exception)
       {
@@ -290,8 +295,8 @@ namespace RestEyes
           }
           else if (propiedadesAjuste[(int)Propiedad.InicioWindows] == Recursos.ModoOffWindows)
           {
-            ((ToolStripMenuItem)notificacionIcono.ContextMenuStrip.Items[(int)Opcion.NoIniciarConWindows]).Checked = false;
-            ((ToolStripMenuItem)notificacionIcono.ContextMenuStrip.Items[(int)Opcion.SiIniciarConWindows]).Checked = true;
+            ((ToolStripMenuItem)notificacionIcono.ContextMenuStrip.Items[(int)Opcion.NoIniciarConWindows]).Checked = true;
+            ((ToolStripMenuItem)notificacionIcono.ContextMenuStrip.Items[(int)Opcion.SiIniciarConWindows]).Checked = false;
           }
 
         }//FIN if: leer variables del archivo para ajustarlos al sistema
