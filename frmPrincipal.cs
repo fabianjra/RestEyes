@@ -17,7 +17,6 @@ namespace RestEyes
     {
       InitializeComponent();
       CargarMenu();
-      ConsultaIniciaWindows();
     }
 
     #region Eventos
@@ -28,7 +27,10 @@ namespace RestEyes
         IniciarContador();
         this.Opacity = 0.0;
 
-        Archivo(true, Recursos.ModoDiscreto, Recursos.ModoOffWindows); //Inicia en modo discreto y en modo de inciar con windows
+        if (ConsultaIniciaWindows())
+          Archivo(true, Recursos.ModoDiscreto, Recursos.ModoOnWindows); //Inicia en modo discreto y en modo de inciar con windows True
+        else
+          Archivo(true, Recursos.ModoDiscreto, Recursos.ModoOffWindows); //Inicia en modo discreto y en modo de inciar con windows False
       }
       catch (Exception ex)
       {
@@ -280,7 +282,7 @@ namespace RestEyes
             ((ToolStripMenuItem)notificacionIcono.ContextMenuStrip.Items[(int)Opcion.ModoAlerta]).Checked = true;
             ((ToolStripMenuItem)notificacionIcono.ContextMenuStrip.Items[(int)Opcion.ModoDiscreto]).Checked = false;
           }
-           
+
           if (propiedadesAjuste[(int)Propiedad.InicioWindows] == Recursos.ModoOnWindows)
           {
             ((ToolStripMenuItem)notificacionIcono.ContextMenuStrip.Items[(int)Opcion.SiIniciarConWindows]).Checked = true;
@@ -312,8 +314,8 @@ namespace RestEyes
       {
         bool inicia = false;
 
-       //Consulta si la app actualmente inicia con windows
-       if(directorioAppRegistro.GetValue(Recursos.NombreApp) != null)
+        //Consulta si la app actualmente inicia con windows
+        if (directorioAppRegistro.GetValue(Recursos.NombreApp) != null)
           inicia = true;
 
         return inicia;
@@ -335,9 +337,9 @@ namespace RestEyes
       {
         if (activador)
         {
-          if(ConsultaIniciaWindows() == false)
-          //Agrega el valor al registro de windows, para iniciar la app con windows
-          directorioAppRegistro.SetValue(Recursos.NombreApp, Application.ExecutablePath);
+          if (ConsultaIniciaWindows() == false)
+            //Agrega el valor al registro de windows, para iniciar la app con windows
+            directorioAppRegistro.SetValue(Recursos.NombreApp, Application.ExecutablePath);
         }
         else
           //Agrega el valor al registro de windows, para iniciar la app con windows
@@ -355,10 +357,10 @@ namespace RestEyes
     enum Opcion
     {
       ModoDiscreto = 0,
-      ModoAlerta,
-      SiIniciarConWindows,
-      NoIniciarConWindows,
-      Cerrar
+      ModoAlerta = 1,
+      SiIniciarConWindows = 3,
+      NoIniciarConWindows = 4,
+      Cerrar = 6
     }
 
     enum Propiedad
