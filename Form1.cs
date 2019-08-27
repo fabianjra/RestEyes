@@ -126,7 +126,7 @@ namespace RestEyes
     {
       tmTiempo = new Timer();
       tmTiempo.Tick += new EventHandler(TmTiempo_Tick);
-      tmTiempo.Interval = 1000; // in miliseconds
+      tmTiempo.Interval = 1000; // en miliseconds
       tmTiempo.Start();
     }
 
