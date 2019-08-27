@@ -292,11 +292,13 @@ namespace RestEyes
           {
             ((ToolStripMenuItem)notificacionIcono.ContextMenuStrip.Items[(int)Opcion.SiIniciarConWindows]).Checked = true;
             ((ToolStripMenuItem)notificacionIcono.ContextMenuStrip.Items[(int)Opcion.NoIniciarConWindows]).Checked = false;
+            IniciarConWindows(true);
           }
           else if (propiedadesAjuste[(int)Propiedad.InicioWindows] == Recursos.ModoOffWindows)
           {
             ((ToolStripMenuItem)notificacionIcono.ContextMenuStrip.Items[(int)Opcion.NoIniciarConWindows]).Checked = true;
             ((ToolStripMenuItem)notificacionIcono.ContextMenuStrip.Items[(int)Opcion.SiIniciarConWindows]).Checked = false;
+            IniciarConWindows(false);
           }
 
         }//FIN if: leer variables del archivo para ajustarlos al sistema
